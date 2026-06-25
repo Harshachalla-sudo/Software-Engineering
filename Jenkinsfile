@@ -66,7 +66,7 @@ pipeline {
                     } else {
                         // Windows deployment logic
                         powershell """
-                        docker rm -f react-app-container -ErrorAction SilentlyContinue
+                        docker rm -f react-app-container 2> \$null
                         docker run -d --name react-app-container -p ${APP_PORT}:3000 ${IMAGE_NAME}
                         """
                     }

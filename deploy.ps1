@@ -29,7 +29,7 @@ Write-Host "==========================================" -ForegroundColor Cyan
 
 # Stop and remove the old container if it exists
 Write-Host "Stopping and removing old container (if exists)..."
-docker rm -f react-app-container -ErrorAction SilentlyContinue
+docker rm -f react-app-container 2>$null
 
 Write-Host "Rebuilding Docker image (this may take a moment)..."
 docker build -t react-example-app .
