@@ -1,0 +1,8 @@
+{
+  "name": "SmartBank Neo",
+  "description": "SmartBank Neo is a high-fidelity futuristic cyberpunk banking dashboard featuring glassmorphism elements, vibrant neon accents, interactive transaction systems, OTP simulation, comprehensive user profile editing, local storage persistence, and rich spending analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
