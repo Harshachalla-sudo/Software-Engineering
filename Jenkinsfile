@@ -60,17 +60,14 @@ pipeline {
                     if (isUnix()) {
                         // Stop and remove old container if it exists
                         sh """
-                        docker ps -a -q --filter "ancestor=${IMAGE_NAME}" | xargs -r docker rm -f || true
-                        docker run -d -p ${APP_PORT}:3000 ${IMAGE_NAME}
+                        docker rm -f react-app-container || true
+                        docker run -d --name react-app-container -p ${APP_PORT}:3000 ${IMAGE_NAME}
                         """
                     } else {
                         // Windows deployment logic
                         powershell """
-                        \$containerId = docker ps -a -q --filter "ancestor=${IMAGE_NAME}"
-                        if (\$containerId) {
-                            docker rm -f \$containerId
-                        }
-                        docker run -d -p ${APP_PORT}:3000 ${IMAGE_NAME}
+                        docker rm -f react-app-container -ErrorAction SilentlyContinue
+                        docker run -d --name react-app-container -p ${APP_PORT}:3000 ${IMAGE_NAME}
                         """
                     }
                 }

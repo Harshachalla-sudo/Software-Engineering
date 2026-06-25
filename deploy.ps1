@@ -27,21 +27,15 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "2. Updating Docker Container" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 
-# Find any running container based on the image
-$containerId = docker ps -a -q --filter "ancestor=react-example-app"
-
-if ($containerId) {
-    Write-Host "Stopping and removing old container..."
-    docker rm -f $containerId
-} else {
-    Write-Host "No existing container found to remove."
-}
+# Stop and remove the old container if it exists
+Write-Host "Stopping and removing old container (if exists)..."
+docker rm -f react-app-container -ErrorAction SilentlyContinue
 
 Write-Host "Rebuilding Docker image (this may take a moment)..."
 docker build -t react-example-app .
 
 Write-Host "Starting new Docker container on port 3000..."
-docker run -d -p 3000:3000 react-example-app
+docker run -d --name react-app-container -p 3000:3000 react-example-app
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Green
